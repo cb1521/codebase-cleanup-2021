@@ -35,33 +35,18 @@ if __name__ == "__main__":
             else:
                 print("OOPS, Couldn't find that product. Please try again.")
 
+    checkout_at = datetime.now()
+
+    subtotal = sum([float(p["price"]) for p in selected_products])
+
+    # PRINT RECEIPT
+
     print("---------")
     print("CHECKOUT AT: " + str(checkout_at.strftime("%Y-%M-%d %H:%m:%S")))
     print("---------")
     for p in selected_products:
+
         print("SELECTED PRODUCT: " + p["name"] + "   " + format_usd(p["price"]))
-
-    print("---------")
-    print(f"SUBTOTAL: {format_usd(subtotal)}")
-    print(f"TAX: {format_usd(subtotal * 0.0875)}")
-    print(f"TOTAL: {format_usd(subtotal * 1.0875)}")
-    print("---------")
-    print("THANK YOU! PLEASE COME AGAIN SOON!")
-    print("---------")
-
-        checkout_at = datetime.now()
-
-        subtotal = sum([float(p["price"]) for p in selected_products])
-
-        # PRINT RECEIPT
-
-        print("---------")
-        print("CHECKOUT AT: " + str(checkout_at.strftime("%Y-%M-%d %H:%m:%S")))
-        print("---------")
-        for p in selected_products:
-
-            print("SELECTED PRODUCT: " + p["name"] + "   " + format_usd(p["price"]))
-
         print("---------")
         print(f"SUBTOTAL: {format_usd(subtotal)}")
         print(f"TAX: {format_usd(subtotal * 0.0875)}")
@@ -79,11 +64,10 @@ if __name__ == "__main__":
         receipt_file.write("------------------------------------------")
         for p in selected_products:
             receipt_file.write("\nSELECTED PRODUCT: " + p["name"] + "   " + format_usd(p["price"]))
-
-        receipt_file.write("\n---------")
-        receipt_file.write(f"\nSUBTOTAL: {format_usd(subtotal)}")
-        receipt_file.write(f"\nTAX: {format_usd(subtotal * 0.0875)}")
-        receipt_file.write(f"\nTOTAL: {format_usd(subtotal * 1.0875)}")
-        receipt_file.write("\n---------")
-        receipt_file.write("\nTHANK YOU! PLEASE COME AGAIN SOON!")
-        receipt_file.write("\n---------")
+            receipt_file.write("\n---------")
+            receipt_file.write(f"\nSUBTOTAL: {format_usd(subtotal)}")
+            receipt_file.write(f"\nTAX: {format_usd(subtotal * 0.0875)}")
+            receipt_file.write(f"\nTOTAL: {format_usd(subtotal * 1.0875)}")
+            receipt_file.write("\n---------")
+            receipt_file.write("\nTHANK YOU! PLEASE COME AGAIN SOON!")
+            receipt_file.write("\n---------")

@@ -5,7 +5,7 @@ from random import choice
 # USER SELECTION
 #
 
-def determine_winner():
+def determine_winner(u, c):
     """
 
     determines the winner of the game
@@ -13,28 +13,25 @@ def determine_winner():
     ex. will determine that the winner, if user chooses rock and computer chooses paper, is the computer
 
     """
-    
-    if u == c:
-        print("It's a tie!")
-
-    elif u == "rock":
-        if c == "paper":
-            print("The computer wins")
-        elif c == "scissors":
-            print("The user wins")
-
-    elif u == "paper": 
-        if c == "rock":
-            print("The computer wins")
-        elif c == "scissors":
-            print("The user wins")
-
-    elif u == "scissors":
-        if c == "rock":
-            print("The computer wins")
-        elif c == "paper":
-            print("The user wins")
-
+    winners= {
+        "rock": {
+            "rock": None,
+            "paper": "paper",
+            "scissors": "rock",
+        },
+        "paper": {
+            "rock": "paper",
+            "paper": None,
+            "scissors": "scissors",
+        },
+        "scissors": {
+            "rock": "rock",
+            "paper": "scissors",
+            "scissors": None,
+        },
+    }
+    winning_choice= winners[u][c]
+    return winning_choice
 if __name__ == "__main__":
 
     valid_options = ["rock", "paper", "scissors"]
@@ -55,4 +52,11 @@ if __name__ == "__main__":
     # DETERMINATION OF WINNER
     #
 
-    determine_winner()
+    winner=determine_winner(u, c)
+
+    if winner == u:
+        print("You won!")
+    elif winner == c:
+        print("You lost.")
+    elif winner == None:
+        print("There's a tie!")
